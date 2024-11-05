@@ -35,6 +35,8 @@ const (
 	NSName
 )
 
+var DefaultNSType NSType = NSGlobal
+
 func Namespace(nsType NSType, ns ...string) {
 	pkgName := outerPkgName()
 	switch nsType {
@@ -64,7 +66,7 @@ func curNamespace() *namespace {
 	name := outerPkgName()
 	if _, ok := namespaceMap[name]; !ok {
 		// default to global namespace
-		Namespace(NSGlobal)
+		Namespace(DefaultNSType)
 	}
 	return namespaceMap[name]
 }
